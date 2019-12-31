@@ -12,7 +12,7 @@ Character.destroy_all
 Charlist.destroy_all
 
 player1 = User.create({username: "player 1", password_digest: "123", money: 600})
-# Character.create({name: "Creep", image: "/characters/idle_citizen.gif", hungry: 75, thirsty: 75, sleepy: 75, social: 75, status: "cool", user: player1})
+Character.create({name: "Creep", image: "/characters/idle_citizen.gif", hungry: 75, thirsty: 75, sleepy: 2, social: 75, status: "cool", user: player1})
 
 # creep = ListChar.create({name: "Creep", image: "/characters/idle_citizen.gif", hungry: 75, thirsty: 75, sleepy: 75, social: 75, status: "cool", user: player1})
 
