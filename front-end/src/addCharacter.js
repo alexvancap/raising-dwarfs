@@ -28,8 +28,7 @@ function addCharacterHandeler(event, character){
     subtractMoney(LOGGED_IN_USER_ID, money).then((newMoney) => {
         if (newMoney.error != "no money"){
             shownMoney.innerText = `${newMoney} G`
-            createCharacter(character, LOGGED_IN_USER_ID)
-            loadMain()
+            createCharacter(character, LOGGED_IN_USER_ID).then(() => loadMain())
         } else {
             if(!document.getElementById("no-money"))
                 console.log(createAlert("#messages", "You don't have enough money!", "danger", "append", {id: "no-money"}))

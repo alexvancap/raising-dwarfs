@@ -62,7 +62,7 @@ function getAllCharacters() {
 }
 
 function createCharacter(character_info, user_id) {
-    fetch(`${ASSET_ROOT}/characters/create`, {
+    return fetch(`${ASSET_ROOT}/characters/create`, {
         method: "POST",
         headers: {
             "Content-Type": "application/json"
@@ -72,7 +72,8 @@ function createCharacter(character_info, user_id) {
             image: character_info.image,
             name: character_info.name
         })
-    })
+    }).then((response) => response.json())
+    .then((response) => response)
 }
 
 function createAlert(tag, text, type, action, attributes = {}) {
