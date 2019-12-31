@@ -1,4 +1,4 @@
-function getCharactersByUserId(user_id) {
+async function getCharactersByUserId(user_id) {
     return fetch(`${ASSET_ROOT}/characters/${user_id}`)
     .then(function(response){
         return response.json()
