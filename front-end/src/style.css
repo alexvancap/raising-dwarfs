@@ -1,0 +1,81 @@
+#container{
+    max-width: 876px;
+    margin: 0 auto;
+}
+
+.card{
+    background-color: rgba(255, 255, 255, 0.726);
+    margin: 2px;
+}
+.card-body{
+    text-align: center;
+    
+}
+
+body{
+    background: #2b0200 url(./img/backgrounds/forest4.png) no-repeat center top;
+    background-size: auto 750px;
+}
+
+.btn{
+    background-color: #11808C;
+    border-color: rgba(17, 128, 140, 0.664);
+}
+
+#shop-building{
+    position: absolute;
+    margin: 330px 0 0 800px
+}
+
+#shop-building:hover{
+    opacity: 0.9;
+}
+
+#shop-sign{
+    position: absolute;
+    margin: 470px 0 0 700px;
+}
+
+#character-building{
+    position: absolute;
+    margin: 320px 0 0 80px
+}
+
+#character-building:hover{
+    opacity: 0.9;
+}
+/* ****************************************************
+----------------------- NAVBAR ------------------------
+****************************************************** */
+
+#navbar {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+    background-color: #732C02;
+  }
+  
+#navbar li {
+    float: left;
+  }
+  
+#navbar li a {
+    display: block;
+    color: white;
+    text-align: center;
+    padding: 14px 16px;
+    text-decoration: none;
+  }
+
+#money {
+    position: absolute;
+    background-color: #3D5912;
+    right: 0px;
+}
+  
+  /* Change the link color to #111 (black) on hover */
+#navbar li a:hover {
+    background-color: #A66F0A;
+  }
+
