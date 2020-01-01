@@ -1,4 +1,4 @@
-LOGGED_IN_USER_ID = 39
+LOGGED_IN_USER_ID = 3
 ASSET_ROOT = "http://localhost:3000"
 CONTAINER = document.getElementById("container")
 MAINTAG = document.querySelector("main")
@@ -18,7 +18,6 @@ function loadMain(){
             if(characterList.length >= 1){
                 CONTAINER.innerHTML = ""
                 MESSAGES.innerHTML = ""
-                backGroundHandeler()
             }else{
                 createAlert("#messages", "Please chose your character!", "success", "prepend")
                 addCharacter()
@@ -27,9 +26,5 @@ function loadMain(){
         showMoney(LOGGED_IN_USER_ID)
 }
 
-function backGroundHandeler() {
-    const shopImage = document.getElementById("shop-building")
-    shopImage.addEventListener("click", () => showShopMenue())
-}
 
 

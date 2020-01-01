@@ -9,6 +9,7 @@ class CreateCharacters < ActiveRecord::Migration[6.0]
       t.integer(:social)
       t.string(:status)
       t.integer(:user_id)
+      t.integer(:earnings)
     end
   end
 end

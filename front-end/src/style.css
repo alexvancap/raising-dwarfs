@@ -84,6 +84,7 @@ body{
 
 .shop-menue-item:hover{
     color: #A66F0A;
+    text-decoration: underline;
 }
 
 /* ****************************************************

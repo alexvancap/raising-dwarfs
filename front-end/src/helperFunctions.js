@@ -62,6 +62,7 @@ function getAllCharacters() {
 }
 
 function createCharacter(character_info, user_id) {
+    console.log(character_info)
     return fetch(`${ASSET_ROOT}/characters/create`, {
         method: "POST",
         headers: {
@@ -70,7 +71,8 @@ function createCharacter(character_info, user_id) {
         body: JSON.stringify({
             user_id: user_id,
             image: character_info.image,
-            name: character_info.name
+            name: character_info.name,
+            earnings: character_info.earnings
         })
     }).then((response) => response.json())
     .then((response) => response)

@@ -4,6 +4,7 @@ class CreateCharlist < ActiveRecord::Migration[6.0]
       t.string(:name)
       t.string(:price)
       t.string(:image)
+      t.integer(:earnings)
     end
   end
 end

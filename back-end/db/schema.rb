@@ -21,12 +21,14 @@ ActiveRecord::Schema.define(version: 2019_12_31_004445) do
     t.integer "social"
     t.string "status"
     t.integer "user_id"
+    t.integer "earnings"
   end
 
   create_table "charlists", force: :cascade do |t|
     t.string "name"
     t.string "price"
     t.string "image"
+    t.integer "earnings"
   end
 
   create_table "users", force: :cascade do |t|

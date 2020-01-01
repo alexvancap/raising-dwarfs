@@ -33,16 +33,7 @@ module BackEnd
     # Middleware like session, flash, cookies can be added back manually.
     # Skip views, helpers and assets when generating a new resource.
     config.api_only = true
-    # config.after_initialize do
-    #   while true do
-    #     characters = Character.all
-    #     characters.each do |character|
-    #       hungry = character.hungry -2
-    #       character.update({hungry: hungry, thirsty: (character.thirsty -5), sleepy: (character.sleepy -1), social: (character.social-2)})
-    #     end
-    #     sleep 10
-    #   end
-    # end
+
 
   end
 end
