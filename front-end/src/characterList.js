@@ -1,3 +1,5 @@
+LOGGED_IN_USER_ID = 2
+
 document.addEventListener("DOMContentLoaded", () => {
   // let card = document.querySelector('.card')
   fetch("http://localhost:3000/characters")
@@ -5,10 +7,11 @@ document.addEventListener("DOMContentLoaded", () => {
       return response.json()
     })
     .then(function (characters) {
-      console.log(characters)
+      // console.log(characters)
       characters.forEach(function (character) {
         createCard(character)
       })
+      pointLoss(character.social)
     })
 
   function createCard(character) {
@@ -55,5 +58,31 @@ document.addEventListener("DOMContentLoaded", () => {
     innerBar.setAttribute("aria-valuemax", "100")
     innerBar.innerText = `${name}: ${num}%`
     outerBar.append(innerBar)
+  }
+
+  function hungerPointLoss() {
+    setInterval(function () {
+      value--
+      console.log(value)
+      fetch(`http://localhost:3000/characters/${LOGGED_IN_USER_ID}`, {
+        method: 'PATCH',
+        body: JSON.stringify({
+          hungry: value
+        }),
+        headers: {
+          'Content-Type': 'application/json'
+        }
+      })
+        .then(function (response) {
+          return response.json()
+        })
+        .then(function (characters) {
+          document.card.innerHTML = ''
+          characters.forEach(function (character) {
+            createCard(character)
+          })
+        }, 3000);
+    }
+    )
   }
 })

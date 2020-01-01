@@ -1,5 +1,4 @@
 class CharactersController < ActionController::API
-  decrease_stats
   def index
     characters = Character.all
     render json: characters
