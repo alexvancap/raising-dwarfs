@@ -12,19 +12,26 @@
     
 }
 
-body{
-    background: #2b0200 url(./img/backgrounds/forest4.png) no-repeat center top;
-    background-size: auto 750px;
-}
-
 .btn{
     background-color: #11808C;
     border-color: rgba(17, 128, 140, 0.664);
 }
 
+/* ****************************************************
+---------------------- PICTURES -----------------------
+****************************************************** */
+
+
+body{
+    background: #2b0200 url(./img/backgrounds/forest4.png) no-repeat center top;
+    background-size: auto 750px;
+    z-index: 0;
+}
+
 #shop-building{
     position: absolute;
-    margin: 330px 0 0 800px
+    margin: 330px 0 0 800px;
+    z-index: -2;
 }
 
 #shop-building:hover{
@@ -34,21 +41,58 @@ body{
 #shop-sign{
     position: absolute;
     margin: 470px 0 0 700px;
+    z-index: -2;
 }
 
 #character-building{
     position: absolute;
-    margin: 320px 0 0 80px
+    margin: 320px 0 0 80px;
+    z-index: -2;
 }
 
 #character-building:hover{
     opacity: 0.9;
 }
+
+#store-container{
+    position: relative;
+    max-width: 900px;
+    margin-right: auto;
+    margin-left: auto;
+
+}
+
+#shop-keeper{
+    position: relative;
+    display: block;
+    width: 100%;
+    z-index: -1;
+    
+}
+#shop-menue{
+    position: absolute;
+    color: white;
+    top: 155px;
+    right: 240px;
+    z-index: 10;
+    font-size: 1.5rem;
+    font-family: 'MedievalSharp', cursive;
+    font-style: bold;
+    list-style-type: none;
+}
+
+
+.shop-menue-item:hover{
+    color: #A66F0A;
+}
+
 /* ****************************************************
 ----------------------- NAVBAR ------------------------
 ****************************************************** */
 
 #navbar {
+    font-family: 'MedievalSharp', cursive;
+    font-style: bold;
     list-style-type: none;
     margin: 0;
     padding: 0;
