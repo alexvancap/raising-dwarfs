@@ -12,8 +12,8 @@ IMAGE_PATH = "./src/img"
 //now file structure makes no sence
 
 document.addEventListener("DOMContentLoaded", () => {
-    loginForm(MAINTAG)
-
+    if (!localStorage.user_id) {loginForm(MAINTAG)}
+    else loadMain(localStorage.user_id)
 })
 
 function loadMain(user_id) {
@@ -46,7 +46,7 @@ function loadMain(user_id) {
         CONTAINER = createAppendElement("div", "", MAINTAG, { id: "container" })
     }
 
-    if (!document.getElementById("nav-bar")){ createMenue() }
+    if (!document.getElementById("money")){ createMenue() }
 }
 
 
