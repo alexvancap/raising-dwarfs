@@ -2,7 +2,7 @@ desc 'Updates the stats every hour'
 task :update_stats => :environment do
     while true do
         date = DateTime.now
-        if (date.min == 59)
+        if (date.min == 58)
             sleep 60
             if (Character.all)
                 characters = Character.all
