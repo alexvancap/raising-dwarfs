@@ -46,7 +46,7 @@ function loadMain(user_id) {
         CONTAINER = createAppendElement("div", "", MAINTAG, { id: "container" })
     }
 
-    createMenue()
+    if (!document.getElementById("nav-bar")){ createMenue() }
 }
 
 
