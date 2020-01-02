@@ -31,7 +31,13 @@
     margin-left:  -100px;
     margin-top: -125px;
   }
+.form-label{
+    color: white
+}
 
+.form-check-label{
+    color: white
+}
   #signUpButton{
     float: right;
   }
