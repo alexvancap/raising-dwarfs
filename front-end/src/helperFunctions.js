@@ -224,26 +224,32 @@ async function updateDataEveryHour() {
 
 function createMenue() {
     const headerTag = document.querySelector("header")
-    const navBar = createPrependElement("ul", "", headerTag, {id: "navbar"})
+    const navBar = createPrependElement("ul", "", headerTag, { id: "navbar" })
 
     const HomeLi = createAppendElement("li", "", navBar)
     createAppendElement("a", "Home", HomeLi)
 
     const charactersLi = createAppendElement("li", "", navBar)
     createAppendElement("a", "Characters", charactersLi)
+    charactersLi.addEventListener("click", function () {
+        characterMenue()
+    })
 
     const storeLi = createAppendElement("li", "", navBar)
     createAppendElement("a", "Store", storeLi)
+    storeLi.addEventListener("click", function () {
+        showShopMenue()
+    })
 
     const logoutLi = createAppendElement("li", "", navBar)
     createAppendElement("a", "Logout", logoutLi)
     logoutLi.addEventListener("click", () => logout(navBar))
 
     const moneyLi = createAppendElement("li", "", navBar)
-    const moneyA = createPrependElement("a", "", moneyLi, {id: "money"})
+    const moneyA = createPrependElement("a", "", moneyLi, { id: "money" })
 
     getUserMoney(LOGGED_IN_USER_ID).then((money) => moneyA.innerText = `${money} G`)
-        
+
 
 }
 
