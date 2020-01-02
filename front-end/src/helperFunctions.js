@@ -232,7 +232,7 @@ function createMenue() {
 
     const logoutLi = createAppendElement("li", "", navBar)
     createAppendElement("a", "Logout", logoutLi)
-    logoutLi.addEventListener("click", () => logout())
+    logoutLi.addEventListener("click", () => logout(navBar))
 
     const moneyLi = createAppendElement("li", "", navBar)
     const moneyA = createPrependElement("a", "", moneyLi, {id: "money"})
@@ -242,7 +242,8 @@ function createMenue() {
 
 }
 
-function logout() {
+function logout(navBar) {
     localStorage.clear()
+    navBar.remove()
     loginForm()
 }
