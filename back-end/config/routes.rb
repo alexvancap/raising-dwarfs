@@ -5,6 +5,8 @@ Rails.application.routes.draw do
   get ("/characters"), to: ("characters#index")
   # patch ("/characters/:id"), to: ("characters#update")
   get ("/characters/decrease-stats"), to: ("characters#decrease_stats")
+  post ("/login"), to: ("users#login")
+  post ("/registe"), to: ("users#create")
 
   post ("/characters/create"), to: ("characters#create")
   get ("/characters/:id/find-user"), to: ("characters#find_user_by_id")

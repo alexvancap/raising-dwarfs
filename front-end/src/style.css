@@ -18,13 +18,35 @@
 }
 
 /* ****************************************************
+---------------------- LOGIN --------------------------
+****************************************************** */
+
+.login-form {
+    position: fixed;
+    /* only to center the login form */
+    width: 200px;
+    max-height: 250px;
+    left: 50%;
+    top: 50%;
+    margin-left:  -100px;
+    margin-top: -125px;
+  }
+
+  #signUpButton{
+    float: right;
+  }
+
+  .error-message {
+      color: red;
+  }
+
+/* ****************************************************
 ---------------------- PICTURES -----------------------
 ****************************************************** */
 
 
 body{
-    background: #2b0200 url(./img/backgrounds/forest4.png) no-repeat center top;
-    background-size: auto 750px;
+    
     z-index: 0;
 }
 

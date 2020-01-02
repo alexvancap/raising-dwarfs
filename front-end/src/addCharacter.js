@@ -1,3 +1,4 @@
+
 function showMoney(user_id){
     const placeholder = document.getElementById("money")
     getUserMoney(user_id).then((money) => placeholder.innerText = `${money} G`)
@@ -5,12 +6,14 @@ function showMoney(user_id){
 }
 
 function addCharacter(){
+    CONTAINER = document.getElementById("container")
     CONTAINER.style.display = "flex";
     CONTAINER.style.flexWrap = "wrap";
     getAllCharacters().then((characters) => chooseCharacter(characters))
 }
 
 function chooseCharacter(characters){
+    console.log("hi")
     characters.forEach(character => {
         const card = createAppendElement("div", "", CONTAINER, {class: "card", style: "width: 18rem;"})
         createAppendElement("img", "", card, {class: "card-img-top", src: `${IMAGE_PATH}/${character.image}`, alt: "character image"})

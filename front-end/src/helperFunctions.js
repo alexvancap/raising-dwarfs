@@ -1,3 +1,10 @@
+
+
+function resetMainTagHTML() {
+    MAINTAG.innerHTML = ""
+    createAppendElement("div", "", MAINTAG, {id: "container"})
+}
+
 async function getCharactersByUserId(user_id) {
     return fetch(`${ASSET_ROOT}/characters/${user_id}/find-user`)
         .then(function (response) {
@@ -95,8 +102,42 @@ function createAlert(tag, text, type, action, attributes = {}) {
     }
 }
 
+function getAndRemoveElement (name) {
+    found = document.querySelectorAll(name)
+    if (found){
+        found.forEach((item) => item.remove())
+    } else {
+        return "no item found"
+    }
+}
 
-updateDataEveryHour()
+function removeClassByIds (ids, classToRemove) {
+    let tag = ""
+    let currentClasses = null
+    newClasses = null
+    for (id of ids){
+        tag = document.getElementById(id)
+        currentClasses = tag.getAttribute("class")
+        newClasses = currentClasses.replace(classToRemove, "")
+        tag.setAttribute("class", newClasses)
+    }
+}
+
+function addClassById (id, classToAdd) {
+    const tag = document.getElementById(id)
+    const currentClasses = tag.getAttribute("class")
+    const new_classes = currentClasses + " " + classToAdd
+    tag.setAttribute("class", new_classes)
+}
+
+function getRandomNumber(min, max) {
+    min = Math.ceil(min);
+    max = Math.floor(max);
+    return Math.floor(Math.random() * (max - min + 1)) + min;
+  }
+
+
+  updateDataEveryHour()
 async function updateDataEveryHour(){
     const interval = setInterval(() => {
         const date = new Date(Date.now())
@@ -106,7 +147,8 @@ async function updateDataEveryHour(){
             setTimeout(() => {
                 updateDataEveryHour() 
                 console.log("timeout")
-            }, 3540)
+                //waits 59minutes before calling function again
+            }, 3540000)
             return clearInterval(interval)
         }
     }, 1000);
