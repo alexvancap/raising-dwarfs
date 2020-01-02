@@ -141,9 +141,15 @@ function getRandomNumber(min, max) {
 async function updateDataEveryHour(){
     const interval = setInterval(() => {
         const date = new Date(Date.now())
-        if((date.getMinutes() === 45)){
-            getCharactersByUserId(LOGGED_IN_USER_ID).then((characters) => console.log(characters))
-            getUserMoney(LOGGED_IN_USER_ID).then((user) => console.log(user))
+        if((date.getMinutes() === 00)){
+            getCharactersByUserId(LOGGED_IN_USER_ID).then((characters) => {
+                //update user stats
+                console.log(characters)
+            })
+            getUserMoney(LOGGED_IN_USER_ID).then((user) => {
+                //update user money
+                console.log(user)
+            })
             setTimeout(() => {
                 updateDataEveryHour() 
                 console.log("timeout")

@@ -2,7 +2,7 @@ desc 'runs all the timed tasks'
 task :add_money => :environment do
     while true do
         p date = DateTime.now
-        if (date.min == 59)
+        if (date.min == 8)
             sleep 60
             User.all.each do |user|
                 if (user)
