@@ -1,4 +1,3 @@
-LOGGED_IN_USER_ID = 3
 ASSET_ROOT = "http://localhost:3000"
 MAINTAG = document.querySelector("main")
 IMAGE_PATH = "./src/img"
@@ -14,10 +13,15 @@ IMAGE_PATH = "./src/img"
 
 document.addEventListener("DOMContentLoaded", () => {
     loginForm(MAINTAG)
-    CONTAINER = document.getElementById("container")
+    
 })
 
-function loadMain(){
+function loadMain(user_id){
+    if (localStorage.user_id) {
+        LOGGED_IN_USER_ID = parseInt(localStorage.user_id)
+    }else{
+        LOGGED_IN_USER_ID = user_id
+    }
     MESSAGES = document.getElementById("messages")
 
     document.body.style.background=  "#2b0200 url(./src/img/backgrounds/forest4.png) no-repeat center top"
@@ -38,7 +42,14 @@ function loadMain(){
             addCharacter()
         }
     })
-    showMoney(LOGGED_IN_USER_ID)
+
+
+    CONTAINER = document.getElementById("container")
+    if (!CONTAINER){
+        CONTAINER = createAppendElement("div", "", MAINTAG, {id: "container"})
+    }
+
+    createMenue()
 }
 
 

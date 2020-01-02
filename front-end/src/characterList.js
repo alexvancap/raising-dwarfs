@@ -1,6 +1,3 @@
-LOGGED_IN_USER_ID = 3
-
-
 function characterMenue(){
   
   fetchCharacterData().then((characters) => {

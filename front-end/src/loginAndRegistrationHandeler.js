@@ -1,6 +1,6 @@
-// loadMain()
-
 const loginForm = () => {
+
+    if (parseInt(localStorage.user_id)){ return loadMain()}
 
     document.body.style.background=  `#2b0200 url(./src/img/backgrounds/forest${getRandomNumber(1, 3)}.png) no-repeat center top`
     document.body.style.backgroundSize= "auto 750px"
@@ -52,67 +52,8 @@ const loginFormHandeler = (formTag, checkBox) => {
                 username: e.target.elements[0].value,
                 password: e.target.elements[1].value
             })
-        }).then(function(response){
-            return response.json()
-        }).then((response) =>{
-            handleLoginOutPut(response, checkBox)
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-            localStorage.setItem("token", response.token)
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-            
-        })
+        }).then((response) => response.json())
+        .then((response) => handleLoginOutPut(response, checkBox) )
     })
 }
 
@@ -120,7 +61,7 @@ const loginFormHandeler = (formTag, checkBox) => {
 const handleLoginOutPut = (response, checkBox) => {
     
     if (checkBox.checked){
-        document.cookie = `user_id=${response.id};path=/;SameSite=Lax`;
+        localStorage.setItem("user_id", response.id)
     }
     const usernameDiv = document.getElementById("login-username")
     const passwordDiv = document.getElementById("login-password")
@@ -140,7 +81,7 @@ const handleLoginOutPut = (response, checkBox) => {
         }
     }else{
         resetMainTagHTML()
-        loadMain()
+        loadMain(response.id)
     }
 }
 
