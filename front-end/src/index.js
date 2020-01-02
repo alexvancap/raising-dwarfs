@@ -17,11 +17,8 @@ document.addEventListener("DOMContentLoaded", () => {
 })
 
 function loadMain(user_id) {
-    if (localStorage.user_id) {
-        LOGGED_IN_USER_ID = parseInt(localStorage.user_id)
-    } else {
-        LOGGED_IN_USER_ID = user_id
-    }
+    LOGGED_IN_USER_ID = user_id
+
     MESSAGES = document.getElementById("messages")
 
     document.body.style.background = "#2b0200 url(./src/img/backgrounds/forest4.png) no-repeat center top"
@@ -32,9 +29,9 @@ function loadMain(user_id) {
     createPrependElement("img", "", MAINTAG, { id: "shop-sign", src: "./src/img/buildings/shop_sign.png", width: "104px", height: "126px" })
     createPrependElement("img", "", MAINTAG, { id: "shop-building", src: "./src/img/buildings/shop_building.png", onclick: "showShopMenue()", width: "281px", height: "255px" })
 
+
     getCharactersByUserId(LOGGED_IN_USER_ID).then((characterList) => {
         if (MESSAGES) MESSAGES.innerHTML = ""
-        console.log(characterList)
         if (characterList.length >= 1) {
             CONTAINER.innerHTML = ""
         } else {

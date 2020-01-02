@@ -3,8 +3,17 @@ class CharactersController < ActionController::API
     characters = Character.all
     render json: characters
   end
-    def find_user_by_id
-        user = User.find(params[:id])
+    def find_characters_by_id
+      p""
+      p""
+      p""
+      p""
+      p""
+      p""
+      p""
+      p""
+      p params[:id]
+        p user = User.find(params[:id])
         character = user.characters
         render json: character
     end

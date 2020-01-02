@@ -1,6 +1,6 @@
 const loginForm = () => {
 
-    if (parseInt(localStorage.user_id)){ return loadMain()}
+    if (parseInt(localStorage.user_id)){ loadMain(localStorage.user_id)}
 
     document.body.style.background=  `#2b0200 url(./src/img/backgrounds/forest${getRandomNumber(1, 3)}.png) no-repeat center top`
     document.body.style.backgroundSize= "auto 750px"
@@ -81,6 +81,8 @@ const handleLoginOutPut = (response, checkBox) => {
         }
     }else{
         resetMainTagHTML()
+
+        
         loadMain(response.id)
     }
 }

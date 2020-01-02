@@ -6,7 +6,6 @@ function addCharacter(){
 }
 
 function chooseCharacter(characters){
-    console.log("hi")
     characters.forEach(character => {
         const card = createAppendElement("div", "", CONTAINER, {class: "card", style: "width: 18rem;"})
         createAppendElement("img", "", card, {class: "card-img-top", src: `${IMAGE_PATH}/${character.image}`, alt: "character image"})
@@ -24,10 +23,10 @@ function addCharacterHandeler(event, character){
     subtractMoney(LOGGED_IN_USER_ID, money).then((newMoney) => {
         if (newMoney.error != "no money"){
             shownMoney.innerText = `${newMoney} G`
-            createCharacter(character, LOGGED_IN_USER_ID).then(() => loadMain())
+            createCharacter(character, LOGGED_IN_USER_ID).then(() => loadMain(LOGGED_IN_USER_ID))
         } else {
             if(!document.getElementById("no-money"))
-                console.log(createAlert("#messages", "You don't have enough money!", "danger", "append", {id: "no-money"}))
+                createAlert("#messages", "You don't have enough money!", "danger", "append", {id: "no-money"})
         }
 
     })

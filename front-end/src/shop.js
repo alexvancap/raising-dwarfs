@@ -35,8 +35,9 @@ function createShopItems(){
 
     shopItems.forEach((shopItem) => {
         const itemDiv = createAppendElement("div", "", storeDiv, {class: "store-item"})
-        createAppendElement("img", "", itemDiv, {src: "./src/img/store/wooden-board.png", width: "250px", height: "200px"})
+        createAppendElement("img", "", itemDiv, {class: "sore-item-background-image", src: "./src/img/store/wooden-board.png", width: "250px", height: "200px"})
         createAppendElement("img", "", itemDiv, {class: "store-item-image", src: `${IMAGE_PATH}/${shopItem.image}`, height: "50px", width: "50px"})
+        createAppendElement("label", `${shopItem.name}`, itemDiv, {class: "store-item-name"})
 
 
     })
@@ -48,6 +49,6 @@ function createShopItems(){
 }
 function backButton(){
     const storeContainer = document.getElementById("store-container")
-            storeContainer.remove()
-            loadMain()
+    storeContainer.remove()
+    loadMain(LOGGED_IN_USER_ID)
 }

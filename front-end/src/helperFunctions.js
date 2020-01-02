@@ -6,6 +6,7 @@ function resetMainTagHTML() {
 }
 
 async function getCharactersByUserId(user_id) {
+    console.log(`id: ${user_id}`)
     return fetch(`${ASSET_ROOT}/characters/${user_id}/find-user`)
         .then(function (response) {
             return response.json()
@@ -81,7 +82,6 @@ function getAllCharacters() {
 
 
 async function createCharacter(character_info, user_id) {
-    console.log(character_info)
     return fetch(`${ASSET_ROOT}/characters/create`, {
         method: "POST",
         headers: {
@@ -191,30 +191,23 @@ function createCard(character) {
 
 
 
-updateDataEveryHour()
+// updateDataEveryHour()
 async function updateDataEveryHour() {
     const interval = setInterval(() => {
         const date = new Date(Date.now())
         if ((date.getMinutes() === 22)) {
-            console.log("yowyow")
             getCharactersByUserId(LOGGED_IN_USER_ID).then((characters) => {
-                console.log(characters)
                 document.querySelector("body").innerHTML = ""
 
                 characters.forEach(function (character) {
                     createCard(character)
-                    console.log("inside foreach")
                 })
-                console.log("after")
             })
 
             getUserMoney(LOGGED_IN_USER_ID).then((user) => {
-                //update user money
-                console.log(user)
             })
             setTimeout(() => {
                 updateDataEveryHour()
-                console.log("timeout")
                 //waits 59minutes before calling function again
             }, 3540000)
             return clearInterval(interval)
