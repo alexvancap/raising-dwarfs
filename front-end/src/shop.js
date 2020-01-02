@@ -24,7 +24,10 @@ function showShopMenue(){
 function createShopItems(){
     const storeContainer = document.getElementById("store-container")
     storeContainer.innerHTML = ""
-    img = createAppendElement("img", "", MAINTAG, {src: "./src/img/store/wooden-board.png"})
+    const storeDiv = createAppendElement("div", "", MAINTAG, {maxWidth: "600px", class: "store-item-container"})
+    createAppendElement("img", "", storeDiv, {src: "./src/img/store/wooden-board.png", width: "250px", height: "200px"})
+    
+
 
 }
 function backButton(){

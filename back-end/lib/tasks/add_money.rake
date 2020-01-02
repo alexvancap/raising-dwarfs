@@ -1,14 +1,19 @@
 desc 'runs all the timed tasks'
 task :add_money => :environment do
     while true do
-        User.all.each do |user|
-            if (user)
-                user.characters.each do |character|
-                    User.update({money: user.money + character.earnings})
-                    p user.money
+        p date = DateTime.now
+        if (date.min == 59)
+            sleep 60
+            User.all.each do |user|
+                if (user)
+                    user.characters.each do |character|
+                        p user.money
+                        User.update({money: user.money + character.earnings})
+                        p user.money
+                    end
                 end
             end
         end
-        sleep 2
+        sleep 1
     end
 end

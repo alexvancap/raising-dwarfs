@@ -13,6 +13,7 @@ document.addEventListener("DOMContentLoaded", () => {
 })
 
 function loadMain(){
+    
         getCharactersByUserId(LOGGED_IN_USER_ID).then((characterList) => {
             console.log(characterList)
             if(characterList.length >= 1){

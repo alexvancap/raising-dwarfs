@@ -94,3 +94,20 @@ function createAlert(tag, text, type, action, attributes = {}) {
         tag.prepend(alert)
     }
 }
+
+
+updateDataEveryHour()
+async function updateDataEveryHour(){
+    const interval = setInterval(() => {
+        const date = new Date(Date.now())
+        if((date.getMinutes() === 45)){
+            getCharactersByUserId(LOGGED_IN_USER_ID).then((characters) => console.log(characters))
+            getUserMoney(LOGGED_IN_USER_ID).then((user) => console.log(user))
+            setTimeout(() => {
+                updateDataEveryHour() 
+                console.log("timeout")
+            }, 3540)
+            return clearInterval(interval)
+        }
+    }, 1000);
+}

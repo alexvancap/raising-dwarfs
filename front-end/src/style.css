@@ -87,6 +87,14 @@ body{
     text-decoration: underline;
 }
 
+
+.store-item-container{
+    background-color: #2b0200;
+    width: 700px;
+    margin: 0 auto;
+    display: flex;
+    flex-grow: row;
+}
 /* ****************************************************
 ----------------------- NAVBAR ------------------------
 ****************************************************** */
