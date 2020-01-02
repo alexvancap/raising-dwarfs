@@ -221,3 +221,34 @@ async function updateDataEveryHour() {
         }
     }, 1000);
 }
+
+function createMenue() {
+    const headerTag = document.querySelector("header")
+    const navBar = createPrependElement("ul", "", headerTag, {id: "navbar"})
+
+    const HomeLi = createAppendElement("li", "", navBar)
+    createAppendElement("a", "Home", HomeLi)
+
+    const charactersLi = createAppendElement("li", "", navBar)
+    createAppendElement("a", "Characters", charactersLi)
+
+    const storeLi = createAppendElement("li", "", navBar)
+    createAppendElement("a", "Store", storeLi)
+
+    const logoutLi = createAppendElement("li", "", navBar)
+    createAppendElement("a", "Logout", logoutLi)
+    logoutLi.addEventListener("click", () => logout(navBar))
+
+    const moneyLi = createAppendElement("li", "", navBar)
+    const moneyA = createPrependElement("a", "", moneyLi, {id: "money"})
+
+    getUserMoney(LOGGED_IN_USER_ID).then((money) => moneyA.innerText = `${money} G`)
+        
+
+}
+
+function logout(navBar) {
+    localStorage.clear()
+    navBar.remove()
+    loginForm()
+}

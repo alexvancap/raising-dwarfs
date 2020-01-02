@@ -1,10 +1,3 @@
-
-function showMoney(user_id){
-    const placeholder = document.getElementById("money")
-    getUserMoney(user_id).then((money) => placeholder.innerText = `${money} G`)
-    
-}
-
 function addCharacter(){
     CONTAINER = document.getElementById("container")
     CONTAINER.style.display = "flex";
