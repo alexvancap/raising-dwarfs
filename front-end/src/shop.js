@@ -22,11 +22,27 @@ function showShopMenue(){
 }
 
 function createShopItems(){
+    const shopItems = [
+        {name: "apple", price: 50, image: "food/apple.png", stats_to_update: {food: 20}},
+        {name: "baguette", price: 100, image: "food/baguette.png",  stats_to_update: {food: 50}},
+        {name: "water", price: 20, image: "food/water.png" , stats_to_update: {thirst: 25}},
+        {name: "pint", price: 50, image: "food/pint.png" , stats_to_add: {thirst: -25, sleep: -10, social: 10}}
+]
     const storeContainer = document.getElementById("store-container")
     storeContainer.innerHTML = ""
+
     const storeDiv = createAppendElement("div", "", MAINTAG, {maxWidth: "600px", class: "store-item-container"})
-    createAppendElement("img", "", storeDiv, {src: "./src/img/store/wooden-board.png", width: "250px", height: "200px"})
+
+    shopItems.forEach((shopItem) => {
+        const itemDiv = createAppendElement("div", "", storeDiv, {class: "store-item"})
+        createAppendElement("img", "", itemDiv, {src: "./src/img/store/wooden-board.png", width: "250px", height: "200px"})
+        createAppendElement("img", "", itemDiv, {class: "store-item-image", src: `${IMAGE_PATH}/${shopItem.image}`, height: "50px", width: "50px"})
+
+
+    })
     
+    
+
 
 
 }
