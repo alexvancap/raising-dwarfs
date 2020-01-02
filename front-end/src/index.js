@@ -24,7 +24,7 @@ function loadMain(){
     document.body.style.backgroundSize= "auto 750px"
 
     createPrependElement("div", "", MAINTAG, {id: "messages"})
-    createPrependElement("img", "", MAINTAG, {id: "character-building", src: "./src/img/buildings/character_building.png", width: "281px", height: "255px"})
+    createPrependElement("img", "", MAINTAG, {id: "character-building", src: "./src/img/buildings/character_building.png", onclick: "characterMenue()", width: "281px", height: "255px"})
     createPrependElement("img", "", MAINTAG, {id: "shop-sign", src: "./src/img/buildings/shop_sign.png", width: "104px", height: "126px"})
     createPrependElement("img", "", MAINTAG, {id: "shop-building", src: "./src/img/buildings/shop_building.png", onclick: "showShopMenue()", width:"281px", height: "255px"})
 

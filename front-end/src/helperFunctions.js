@@ -1,4 +1,4 @@
-
+ASSET_ROOT = "http://localhost:3000"
 
 function resetMainTagHTML() {
     MAINTAG.innerHTML = ""
@@ -59,6 +59,16 @@ function subtractMoney(user_id, money) {
         })
 }
 
+async function fetchCharacterData(){
+    return fetch("http://localhost:3000/characters")
+      .then(function (response) {
+        return response.json()
+      })
+      .then(function (characters) {
+          return characters
+      })
+  }
+
 function getAllCharacters() {
     return fetch(`${ASSET_ROOT}/list-chars`)
         .then((result) => {
@@ -68,7 +78,9 @@ function getAllCharacters() {
         })
 }
 
-function createCharacter(character_info, user_id) {
+
+
+async function createCharacter(character_info, user_id) {
     console.log(character_info)
     return fetch(`${ASSET_ROOT}/characters/create`, {
         method: "POST",
@@ -137,15 +149,60 @@ function getRandomNumber(min, max) {
   }
 
 
+  function createCard(character) {
+      container = document.getElementById("container")
+    const card = document.createElement("div")
+    card.setAttribute("class", "card")
+    card.style.width = "18rem"
+    card.style.margin = "0 auto"
+    container.append(card)
+    const image = document.createElement("img")
+    image.setAttribute("src", `${IMAGE_PATH}/${character.image}`)
+    card.append(image)
+    const cardBody = document.createElement("div")
+    cardBody.setAttribute("class", "card-body")
+    card.append(cardBody)
+    const title = document.createElement("h5")
+    title.setAttribute("class", "card-title")
+    title.innerText = character.name
+    cardBody.append(title)
+    const cardText = document.createElement("p")
+    cardText.setAttribute("class", "card-text")
+    cardBody.append(cardText)
+    progressBar(character.hungry, "Hunger", cardBody)
+    progressBar(character.thirsty, "Thirst", cardBody)
+    progressBar(character.social, "Social", cardBody)
+    progressBar(character.social, "Sleep", cardBody)
+    const state = document.createElement("p")
+    state.innerText = `Status: ${character.status}`
+    cardBody.append(state)
+    const StatusButton = document.createElement("button")
+    StatusButton.setAttribute("class", "btn btn-primary")
+    StatusButton.innerText = "view"
+    cardBody.append(StatusButton)
+  }
+
+  
+
+
+
   updateDataEveryHour()
 async function updateDataEveryHour(){
     const interval = setInterval(() => {
         const date = new Date(Date.now())
-        if((date.getMinutes() === 00)){
+        if((date.getMinutes() === 22)){
+            console.log("yowyow")
             getCharactersByUserId(LOGGED_IN_USER_ID).then((characters) => {
-                //update user stats
                 console.log(characters)
+                document.querySelector("body").innerHTML = ""
+
+                characters.forEach(function (character) {
+                    createCard(character)
+                    console.log("inside foreach")
+                  })
+                  console.log("after")
             })
+            
             getUserMoney(LOGGED_IN_USER_ID).then((user) => {
                 //update user money
                 console.log(user)
