@@ -11,7 +11,7 @@ document.addEventListener("DOMContentLoaded", () => {
       characters.forEach(function (character) {
         createCard(character)
       })
-      pointLoss(character.social)
+
     })
 
   function createCard(character) {

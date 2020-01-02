@@ -2,7 +2,7 @@
 
 function resetMainTagHTML() {
     MAINTAG.innerHTML = ""
-    createAppendElement("div", "", MAINTAG, {id: "container"})
+    createAppendElement("div", "", MAINTAG, { id: "container" })
 }
 
 async function getCharactersByUserId(user_id) {
@@ -82,7 +82,7 @@ function createCharacter(character_info, user_id) {
             earnings: character_info.earnings
         })
     }).then((response) => response.json())
-    .then((response) => response)
+        .then((response) => response)
 }
 
 function createAlert(tag, text, type, action, attributes = {}) {
@@ -102,20 +102,20 @@ function createAlert(tag, text, type, action, attributes = {}) {
     }
 }
 
-function getAndRemoveElement (name) {
+function getAndRemoveElement(name) {
     found = document.querySelectorAll(name)
-    if (found){
+    if (found) {
         found.forEach((item) => item.remove())
     } else {
         return "no item found"
     }
 }
 
-function removeClassByIds (ids, classToRemove) {
+function removeClassByIds(ids, classToRemove) {
     let tag = ""
     let currentClasses = null
     newClasses = null
-    for (id of ids){
+    for (id of ids) {
         tag = document.getElementById(id)
         currentClasses = tag.getAttribute("class")
         newClasses = currentClasses.replace(classToRemove, "")
@@ -123,7 +123,7 @@ function removeClassByIds (ids, classToRemove) {
     }
 }
 
-function addClassById (id, classToAdd) {
+function addClassById(id, classToAdd) {
     const tag = document.getElementById(id)
     const currentClasses = tag.getAttribute("class")
     const new_classes = currentClasses + " " + classToAdd
@@ -134,24 +134,28 @@ function getRandomNumber(min, max) {
     min = Math.ceil(min);
     max = Math.floor(max);
     return Math.floor(Math.random() * (max - min + 1)) + min;
-  }
+}
 
 
-  updateDataEveryHour()
-async function updateDataEveryHour(){
+updateDataEveryHour()
+async function updateDataEveryHour() {
     const interval = setInterval(() => {
         const date = new Date(Date.now())
-        if((date.getMinutes() === 00)){
+        if ((date.getMinutes() === 16)) {
             getCharactersByUserId(LOGGED_IN_USER_ID).then((characters) => {
                 //update user stats
                 console.log(characters)
+                characters.forEach(function (character) {
+                    createCard(character)
+                    console.log("card created")
+                })
             })
             getUserMoney(LOGGED_IN_USER_ID).then((user) => {
                 //update user money
                 console.log(user)
             })
             setTimeout(() => {
-                updateDataEveryHour() 
+                updateDataEveryHour()
                 console.log("timeout")
                 //waits 59minutes before calling function again
             }, 3540000)
