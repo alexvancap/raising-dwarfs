@@ -226,8 +226,11 @@ function createMenue() {
     const headerTag = document.querySelector("header")
     const navBar = createPrependElement("ul", "", headerTag, { id: "navbar" })
 
-    const HomeLi = createAppendElement("li", "", navBar)
-    createAppendElement("a", "Home", HomeLi)
+    const homeLi = createAppendElement("li", "", navBar)
+    createAppendElement("a", "Home", homeLi)
+    homeLi.addEventListener("click", function () {
+        loadMain(LOGGED_IN_USER_ID)
+    })
 
     const charactersLi = createAppendElement("li", "", navBar)
     createAppendElement("a", "Characters", charactersLi)
