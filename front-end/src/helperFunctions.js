@@ -175,14 +175,21 @@ function createCard(character) {
     progressBar(character.thirsty, "Thirst", cardBody)
     progressBar(character.social, "Social", cardBody)
     progressBar(character.social, "Sleep", cardBody)
-    const state = document.createElement("p")
-    state.innerText = `Status: ${character.status}`
-    cardBody.append(state)
+    // const state = document.createElement("p")
+    // state.innerText = `Status: ${character.status}`
+    // cardBody.append(state)
     const StatusButton = document.createElement("button")
     StatusButton.setAttribute("class", "btn btn-primary")
-    StatusButton.innerText = "close"
+    StatusButton.innerText = "sleep" //need this to be conditonal on database status if character is "sleeping"
     StatusButton.addEventListener("click", function () {
-        characterContainer.remove()
+        if (character.status === "awake") {
+            StatusButton.innerText = "wake up"
+        } else {
+            StatusButton.innerText = "sleep"
+        }
+        sleepToggle(LOGGED_IN_USER_ID, character)
+        // characterContainer.remove()
+
     })
     cardBody.append(StatusButton)
 }
@@ -246,7 +253,6 @@ function createMenue() {
 
     getUserMoney(LOGGED_IN_USER_ID).then((money) => moneyA.innerText = `${money} G`)
 
-
 }
 
 function logout(navBar) {
@@ -254,3 +260,38 @@ function logout(navBar) {
     navBar.remove()
     loginForm()
 }
+function sleepToggle(userId, character) {
+    let status
+    if (character.status === "sleeping") {
+        status = "awake"
+    } else {
+        status = "sleeping"
+    }
+    fetch(`${ASSET_ROOT}/characters/${userId}/update`, {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify({
+            character: character.id,
+            status: status
+        })
+    }).then((response) => response.json())
+        .then((response) => {
+            // state.innerText = 
+            console.log(`Status: ${response.status}`)
+            character.status = response.status
+        })
+}
+    // fetch(`${ASSET_ROOT}/characters/user_id`, {
+    //     method: "PATCH",
+    //     headers: {
+    //         "Content-Type": "application/json"
+    //     },
+    //     body: JSON.stringify({
+    //         status: sleep
+    //     })
+    // }).then((response) => response.json())
+    //     .then((response) => {
+    //         response
+    //     })
