@@ -6,7 +6,7 @@ function resetMainTagHTML() {
 }
 
 async function getCharactersByUserId(user_id) {
-    console.log(`id: ${user_id}`)
+
     return fetch(`${ASSET_ROOT}/characters/${user_id}/find-user`)
         .then(function (response) {
             return response.json()
@@ -150,14 +150,19 @@ function getRandomNumber(min, max) {
 
 
 function createCard(character) {
+    let container
+    if(!document.getElementById("container")){
+        container = createAppendElement("div", "", MAINTAG, {id: "container"})
+    }
+   
     container = document.getElementById("container")
-    const characterContainer = document.createElement("container")
-    container.append(characterContainer)
+    container.style.display = "flex"
+    container.style.flexWrap = "wrap"
     const card = document.createElement("div")
     card.setAttribute("class", "card")
     card.style.width = "18rem"
     card.style.margin = "0 auto"
-    characterContainer.append(card)
+    container.append(card)
     const image = document.createElement("img")
     image.setAttribute("src", `${IMAGE_PATH}/${character.image}`)
     card.append(image)

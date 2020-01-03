@@ -122,6 +122,8 @@ body{
 
 
 .store-item-container{
+    top: 75px;
+    position: relative;
     max-width: 960px;
     margin: 0 auto;
     display: flex;
@@ -138,6 +140,7 @@ body{
 
 .store-item-image{
     position: absolute;
+    left: 125px;
     top: 35px;
 }
 
@@ -149,6 +152,82 @@ body{
     width: 100%;
     text-align: center;
     top: 85px;
+}
+
+.store-item-description{
+    position: absolute;
+    width: 100%;
+    text-align: center;
+    top: 125px;
+    line-height: 15px;
+}
+
+.store-item-button{
+    background-image: url(./img/add-ons/button-unclicked.png);
+    font-family: 'MedievalSharp', cursive;
+    text-align: center;
+    line-height: 50px;
+    font-size: 1.5em;
+    background-size: 100% 100%;
+    position: absolute;
+    width: 50%;
+    height: 50px;
+    left: 25%;
+    bottom: 10%;
+}
+
+.store-item-button:hover{
+    background-image: url(./img/add-ons/button-clicked.png);
+}
+
+#close-button{
+    width: 50px;
+    height: 50px;
+    position: absolute;
+    right: 0px;
+    top: 0px;
+    z-index: 1;
+    background-image: url(./img/add-ons/button.png);
+    background-size: 100% 100%;
+    border: none;
+}
+
+#close-button:hover{
+    background-image: url(./img/add-ons/button1.png)
+}
+
+#store-select-container{
+    padding-top: 10px;
+    position: absolute;
+    background-image: url(./img/add-ons/panel-brown.png);
+    width: 350px;
+    left: 33%;
+    min-height: 150px;
+    flex-grow: auto;
+    margin: 0 auto;
+    top: 150px;
+    background-size: 100% 100%;
+    padding-bottom: 50px;
+}
+
+.store-select-character{
+    position: relative;
+    font-family: 'MedievalSharp', cursive;
+    font-size: 1.5em;
+    font-style: bold;
+    width: 175px;
+    height: 50px;
+    text-align: center;
+    line-height: 50px;
+    top: 40px;
+    background-image: url(./img/add-ons/button-unclicked.png);
+    background-size: 100% 100%;
+    margin: 0 auto;
+    margin-bottom: 20px;
+}
+
+.store-select-character:hover{
+    background-image: url(./img/add-ons/button-clicked.png);
 }
 /* ****************************************************
 ----------------------- NAVBAR ------------------------
