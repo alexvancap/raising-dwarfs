@@ -35,7 +35,7 @@ function createPrependElement(tag, input, parent, attributes = {}) {
     return createdTag
 }
 
-function getUserMoney(user_id) {
+async function getUserMoney(user_id) {
     return fetch(`${ASSET_ROOT}/users/${user_id}/getmoney`)
         .then(function (response) {
             return response.json()
@@ -43,7 +43,7 @@ function getUserMoney(user_id) {
         .then((response) => response)
 }
 
-function subtractMoney(user_id, money) {
+async function subtractMoney(user_id, money) {
     return fetch(`${ASSET_ROOT}/users/${user_id}/substract-money`, {
         method: "POST",
         headers: {
@@ -164,11 +164,31 @@ function createCard(character) {
     card.style.margin = "0 auto"
     container.append(card)
     const image = document.createElement("img")
-    image.setAttribute("src", `${IMAGE_PATH}/${character.image}`)
-    card.append(image)
+
     const cardBody = document.createElement("div")
     cardBody.setAttribute("class", "card-body")
-    card.append(cardBody)
+    
+
+    if (character.status == "dead"){
+        image.setAttribute("src", `${IMAGE_PATH}/add-ons/gravestone.png`)
+        image.style.height = "333px"
+        image.style.width = "286px"
+        progressBar(0, "Hunger", cardBody)
+        progressBar(0, "Thirst", cardBody)
+        progressBar(0, "Social", cardBody)
+        progressBar(0, "Sleep", cardBody)
+
+    }else{
+        image.setAttribute("src", `${IMAGE_PATH}/${character.image}`)
+        progressBar(character.hungry, "Hunger", cardBody)
+        progressBar(character.thirsty, "Thirst", cardBody)
+        progressBar(character.social, "Social", cardBody)
+        progressBar(character.sleepy, "Sleep", cardBody)
+    }
+    
+    
+    card.append(image)
+    
     const title = document.createElement("h5")
     title.setAttribute("class", "card-title")
     title.innerText = character.name
@@ -176,21 +196,22 @@ function createCard(character) {
     const cardText = document.createElement("p")
     cardText.setAttribute("class", "card-text")
     cardBody.append(cardText)
-    progressBar(character.hungry, "Hunger", cardBody)
-    progressBar(character.thirsty, "Thirst", cardBody)
-    progressBar(character.social, "Social", cardBody)
-    progressBar(character.social, "Sleep", cardBody)
+    card.append(cardBody)
     // const state = document.createElement("p")
     // state.innerText = `Status: ${character.status}`
     // cardBody.append(state)
     const StatusButton = document.createElement("button")
     StatusButton.setAttribute("class", "btn btn-primary")
     StatusButton.innerText = "sleep" //need this to be conditonal on database status if character is "sleeping"
+    //button changes status from dead to asleep
     StatusButton.addEventListener("click", function () {
+
         if (character.status === "awake") {
             StatusButton.innerText = "wake up"
-        } else {
-            StatusButton.innerText = "sleep"
+        } else if (character.status == "dead"){
+            StatusButton.innerText = "dead"
+        }else{
+            StatusButton.innerText = "wake up"
         }
         sleepToggle(LOGGED_IN_USER_ID, character)
         // characterContainer.remove()
@@ -234,6 +255,7 @@ function createMenue() {
     const homeLi = createAppendElement("li", "", navBar)
     createAppendElement("a", "Home", homeLi)
     homeLi.addEventListener("click", function () {
+        CONTAINER.innerHTML = ""
         loadMain(LOGGED_IN_USER_ID)
     })
 
@@ -272,7 +294,7 @@ function sleepToggle(userId, character) {
     } else {
         status = "sleeping"
     }
-    fetch(`${ASSET_ROOT}/characters/${userId}/update`, {
+    fetch(`${ASSET_ROOT}/characters/${userId}/update-status`, {
         method: "POST",
         headers: {
             "Content-Type": "application/json"
@@ -287,6 +309,19 @@ function sleepToggle(userId, character) {
             console.log(`Status: ${response.status}`)
             character.status = response.status
         })
+}
+
+async function updateCharacter(character, stats_to_update){
+    return fetch(`${ASSET_ROOT}/characters/${character.id}/update`, {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify({
+            stats_to_update
+        })
+    }).then((response) => response.json())
+    .then((response) => response)
 }
     // fetch(`${ASSET_ROOT}/characters/user_id`, {
     //     method: "PATCH",

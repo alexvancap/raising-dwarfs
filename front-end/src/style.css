@@ -180,7 +180,7 @@ body{
     background-image: url(./img/add-ons/button-clicked.png);
 }
 
-#close-button{
+.close-button{
     width: 50px;
     height: 50px;
     position: absolute;
@@ -192,7 +192,7 @@ body{
     border: none;
 }
 
-#close-button:hover{
+.close-button:hover{
     background-image: url(./img/add-ons/button1.png)
 }
 
@@ -216,7 +216,7 @@ body{
     font-size: 1.5em;
     font-style: bold;
     width: 175px;
-    height: 50px;
+    height: 100px;
     text-align: center;
     line-height: 50px;
     top: 40px;
@@ -228,6 +228,18 @@ body{
 
 .store-select-character:hover{
     background-image: url(./img/add-ons/button-clicked.png);
+}
+
+.store-select-character-stats{
+    margin-top: -10px;
+    line-height: 0.8em;
+    font-size: 0.6em;
+    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+    font-style: none;
+}
+
+.close-select-panel:hover{
+    background-image: url(./img/add-ons/button1.png)
 }
 /* ****************************************************
 ----------------------- NAVBAR ------------------------

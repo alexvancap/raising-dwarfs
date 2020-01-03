@@ -1,4 +1,6 @@
 function addCharacter(){
+    document.getElementById("messages").innerHTML = ""
+    if (document.getElementById("store-container")) document.getElementById("store-container").innerHTML = ""
     CONTAINER = document.getElementById("container")
     CONTAINER.style.display = "flex";
     CONTAINER.style.flexWrap = "wrap";

@@ -4,6 +4,7 @@ Rails.application.routes.draw do
   get ("/characters/:id"), to: ("characters#index")
   get ("/characters"), to: ("characters#index")
   #patch ("/characters/:id"), to: ("characters#update")
+  post ("/characters/:id/update-status"), to: ("characters#update_status")
   post ("/characters/:id/update"), to: ("characters#update")
   get ("/characters/decrease-stats"), to: ("characters#decrease_stats")
   post ("/login"), to: ("users#login")

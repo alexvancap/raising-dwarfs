@@ -1,4 +1,5 @@
 function characterMenue() {
+  document.getElementById("messages").innerHTML = ""
 
   fetchCharacterData().then((characters) => {
     console.log(characters)

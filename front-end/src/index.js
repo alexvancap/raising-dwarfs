@@ -8,6 +8,15 @@ IMAGE_PATH = "./src/img"
 //special image gets different color when moving over building
 
 
+
+
+
+
+
+
+//do something with dead status
+
+
 //make index.js the login file???????????
 //now file structure makes no sence
 

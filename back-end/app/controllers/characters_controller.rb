@@ -15,6 +15,22 @@ class CharactersController < ActionController::API
     end
 
     def update
+      character = Character.find(params[:id])
+
+      params[:stats_to_update].each do |key, value|
+        if !(character[key] > 100)
+          if (character[key] < 0)
+            character.update({status: "dead"})
+          else
+            character.update({"#{key}": character[key] + value})
+          end
+        end
+      end
+
+      render json: character
+    end
+
+    def update_status
       character = Character.find(params[:character])
       character.update({status: params[:status]})
       render json: character
