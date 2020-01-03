@@ -45,6 +45,19 @@
   .error-message {
       color: red;
   }
+  
+
+  /* ****************************************************
+---------------------- REGISTER --------------------------
+****************************************************** */
+
+#register-form{
+    top: 40%
+}
+
+
+
+
 
 /* ****************************************************
 ---------------------- PICTURES -----------------------
@@ -70,6 +83,11 @@ body{
     position: absolute;
     margin: 470px 0 0 700px;
     z-index: -2;
+}
+
+#shop-sign:hover{
+    transform: rotate(360deg);
+    transition: transform 0.6s;
 }
 
 #character-building{

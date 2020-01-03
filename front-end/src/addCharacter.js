@@ -1,7 +1,10 @@
 function addCharacter(){
     document.getElementById("messages").innerHTML = ""
     if (document.getElementById("store-container")) document.getElementById("store-container").innerHTML = ""
-    CONTAINER = document.getElementById("container")
+    if (document.getElementById("container"))
+        CONTAINER = document.getElementById("container")
+    else
+        CONTAINER = createAppendElement("div", "", MAINTAG, {id: "container"})
     CONTAINER.style.display = "flex";
     CONTAINER.style.flexWrap = "wrap";
     getAllCharacters().then((characters) => chooseCharacter(characters))

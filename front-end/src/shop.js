@@ -78,9 +78,11 @@ function selectCharacterToGiveItem(shopItem, storeDiv){
     getCharactersByUserId(LOGGED_IN_USER_ID).then((characters) => {
         shopItemIsOutOfScope = shopItem
         characters.forEach(character => {
-            const button = createAppendElement("div", `${character.name}`, selectPanel, {class: "store-select-character"})
-            const stats = createAppendElement("p", `hunger: ${character.hungry}%,\n thirst: ${character.thirsty}%,\n social: ${character.social}, sleep: ${character.sleepy}%`, button, {class: "store-select-character-stats"})
-            button.addEventListener("click", () => buyItem(character, shopItemIsOutOfScope))
+            if (character.status != "dead"){
+                const button = createAppendElement("div", `${character.name}`, selectPanel, {class: "store-select-character"})
+                const stats = createAppendElement("p", `hunger: ${character.hungry}%,\n thirst: ${character.thirsty}%,\n social: ${character.social}, sleep: ${character.sleepy}%`, button, {class: "store-select-character-stats"})
+                button.addEventListener("click", () => buyItem(character, shopItemIsOutOfScope))
+            }
         })
     })
 }

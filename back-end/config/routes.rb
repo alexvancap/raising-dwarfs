@@ -8,7 +8,7 @@ Rails.application.routes.draw do
   post ("/characters/:id/update"), to: ("characters#update")
   get ("/characters/decrease-stats"), to: ("characters#decrease_stats")
   post ("/login"), to: ("users#login")
-  post ("/registe"), to: ("users#create")
+  post ("/register"), to: ("users#create")
   get ("/characters/:id/find-characer"), to: ("characters#find_character")
 
   post ("/characters/create"), to: ("characters#create")

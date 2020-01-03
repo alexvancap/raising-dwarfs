@@ -32,7 +32,7 @@ class UsersController < ActionController::API
             end
 
             if errors == {}
-                created_user = User.create(allowed_params)
+                created_user = User.create({username: params[:username], email: params[:email], password: params[:password], money: 600})
                 render json: created_user
             else
                 render json: errors

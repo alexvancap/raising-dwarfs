@@ -94,10 +94,10 @@ const handleLoginOutPut = (response, checkBox) => {
 const registrationForm = (registerButton) => {
     registerButton.addEventListener("click", (e) => {
         resetMainTagHTML()
-        createAppendElement("h1", "Sign up", MAINTAG)
 
         //create form
-        const formTag = createAppendElement("form", "", MAINTAG, {class: "register-form needs-validation"})
+        const container = document.getElementById("container")
+        const formTag = createAppendElement("form", "", container, {class: "login-form needs-validation", id: "register-form"})
         //dissables standart html validation
         formTag.setAttribute("novalidate", "true")
 

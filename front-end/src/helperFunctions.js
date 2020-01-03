@@ -211,8 +211,12 @@ function createCard(character) {
         } else if (updatedCharacter.status == "sleeping"){
             CHARACTER_STATUS = "sleeping"
             StatusButton.innerText = "wake up"
+        }else{
+            StatusButton.innerText = "Dead"
         }
-        StatusButton.addEventListener("click", (e) => sleepToggle(updatedCharacter, LOGGED_IN_USER_ID))
+        if (updatedCharacter.status != "dead"){
+            StatusButton.addEventListener("click", (e) => sleepToggle(updatedCharacter, LOGGED_IN_USER_ID))
+        }
     })
     
     
@@ -300,11 +304,11 @@ function createProgressBar(character, cardBody, card){
 
 
 
-// updateDataEveryHour()
+updateDataEveryHour()
 async function updateDataEveryHour() {
     const interval = setInterval(() => {
         const date = new Date(Date.now())
-        if ((date.getMinutes() === 22)) {
+        if ((date.getMinutes() === 00 && date.getSeconds() >= 10)) {
             getCharactersByUserId(LOGGED_IN_USER_ID).then((characters) => {
                 document.querySelector("body").innerHTML = ""
 
@@ -332,18 +336,33 @@ function createMenue() {
     createAppendElement("a", "Home", homeLi)
     homeLi.addEventListener("click", function () {
         CONTAINER.innerHTML = ""
+        if (document.getElementById("store-container")){
+            document.getElementById("store-container").remove()
+        }
         loadMain(LOGGED_IN_USER_ID)
     })
 
     const charactersLi = createAppendElement("li", "", navBar)
     createAppendElement("a", "Characters", charactersLi)
     charactersLi.addEventListener("click", function () {
+        if (document.getElementById("container")){
+            document.getElementById("container").innerHTML = ""
+        }
+        if (document.getElementById("store-container")){
+            document.getElementById("store-container").remove()
+        }
         characterMenue()
     })
 
     const storeLi = createAppendElement("li", "", navBar)
     createAppendElement("a", "Store", storeLi)
     storeLi.addEventListener("click", function () {
+        if (document.getElementById("container")){
+            document.getElementById("container").remove()
+        }
+        if (document.getElementById("store-container")){
+            document.getElementById("store-container").remove()
+        }
         showShopMenue()
     })
 
