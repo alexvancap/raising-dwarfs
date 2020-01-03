@@ -1,4 +1,5 @@
 ASSET_ROOT = "http://localhost:3000"
+CHARACTER_STATUS = ""
 
 function resetMainTagHTML() {
     MAINTAG.innerHTML = ""
@@ -14,6 +15,17 @@ async function getCharactersByUserId(user_id) {
             return response
         })
 }
+
+async function getCharacterByCharacterId(user_id) {
+
+    return fetch(`${ASSET_ROOT}/characters/${user_id}/find-characer`)
+        .then(function (response) {
+            return response.json()
+        }).then(function (response) {
+            return response
+        })
+}
+
 
 function createAppendElement(tag, input, parent, attributes = {}) {
     const createdTag = document.createElement(tag)
@@ -150,7 +162,8 @@ function getRandomNumber(min, max) {
 
 
 function createCard(character) {
-    let container
+
+    
     if(!document.getElementById("container")){
         container = createAppendElement("div", "", MAINTAG, {id: "container"})
     }
@@ -163,13 +176,91 @@ function createCard(character) {
     card.style.width = "18rem"
     card.style.margin = "0 auto"
     container.append(card)
-    const image = document.createElement("img")
+    
 
     const cardBody = document.createElement("div")
     cardBody.setAttribute("class", "card-body")
     
+    createProgressBar(character, cardBody, card)
+    
+    
+    
+    const title = document.createElement("h5")
+    title.setAttribute("class", "card-title")
+    title.innerText = character.name
+    cardBody.append(title)
+    const cardText = document.createElement("p")
+    cardText.setAttribute("class", "card-text")
+    cardBody.append(cardText)
+    card.append(cardBody)
+    // const state = document.createElement("p")
+    // state.innerText = `Status: ${character.status}`
+    // cardBody.append(state)
+    const StatusButton = document.createElement("button")
+    StatusButton.setAttribute("class", "btn btn-primary")
+    StatusButton.setAttribute("id", "status-button")
 
+    cardBody.append(StatusButton)
+    
+
+    getCharacterByCharacterId(character.id).then((updatedCharacter) => {
+        
+        if (updatedCharacter.status === "awake") {
+            CHARACTER_STATUS = "awake"
+            StatusButton.innerText = "sleep"
+        } else if (updatedCharacter.status == "sleeping"){
+            CHARACTER_STATUS = "sleeping"
+            StatusButton.innerText = "wake up"
+        }
+        StatusButton.addEventListener("click", (e) => sleepToggle(updatedCharacter, LOGGED_IN_USER_ID))
+    })
+    
+    
+}
+
+
+
+
+
+function sleepToggle(character, userId) {
+    console.log(CHARACTER_STATUS)
+    if (CHARACTER_STATUS == "awake") {
+        status = "sleeping"
+    } else if (CHARACTER_STATUS == "sleeping"){
+        status = "awake"
+    }
+    fetch(`${ASSET_ROOT}/characters/${userId}/update-status`, {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify({
+            character: character.id,
+            status: status
+        })
+    }).then((response) => response.json())
+        .then((response) => {
+            // state.innerText = 
+            console.log("response: "+ response.status)
+
+            statusButton = document.getElementById("status-button")
+            if (response.status === "awake") {
+                CHARACTER_STATUS = "awake"
+                statusButton.innerText = "sleep"
+            } else if (response.status == "sleeping"){
+                CHARACTER_STATUS = "sleeping"
+                statusButton.innerText = "wake up"
+            }
+        })
+}
+
+
+
+function createProgressBar(character, cardBody, card){
+
+    const image = document.createElement("img")
     if (character.status == "dead"){
+
         image.setAttribute("src", `${IMAGE_PATH}/add-ons/gravestone.png`)
         image.style.height = "333px"
         image.style.width = "286px"
@@ -185,40 +276,25 @@ function createCard(character) {
         progressBar(character.social, "Social", cardBody)
         progressBar(character.sleepy, "Sleep", cardBody)
     }
-    
-    
     card.append(image)
-    
-    const title = document.createElement("h5")
-    title.setAttribute("class", "card-title")
-    title.innerText = character.name
-    cardBody.append(title)
-    const cardText = document.createElement("p")
-    cardText.setAttribute("class", "card-text")
-    cardBody.append(cardText)
-    card.append(cardBody)
-    // const state = document.createElement("p")
-    // state.innerText = `Status: ${character.status}`
-    // cardBody.append(state)
-    const StatusButton = document.createElement("button")
-    StatusButton.setAttribute("class", "btn btn-primary")
-    StatusButton.innerText = "sleep" //need this to be conditonal on database status if character is "sleeping"
-    //button changes status from dead to asleep
-    StatusButton.addEventListener("click", function () {
-
-        if (character.status === "awake") {
-            StatusButton.innerText = "wake up"
-        } else if (character.status == "dead"){
-            StatusButton.innerText = "dead"
-        }else{
-            StatusButton.innerText = "wake up"
-        }
-        sleepToggle(LOGGED_IN_USER_ID, character)
-        // characterContainer.remove()
-
-    })
-    cardBody.append(StatusButton)
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -287,29 +363,25 @@ function logout(navBar) {
     navBar.remove()
     loginForm()
 }
-function sleepToggle(userId, character) {
-    let status
-    if (character.status === "sleeping") {
-        status = "awake"
-    } else {
-        status = "sleeping"
-    }
-    fetch(`${ASSET_ROOT}/characters/${userId}/update-status`, {
-        method: "POST",
-        headers: {
-            "Content-Type": "application/json"
-        },
-        body: JSON.stringify({
-            character: character.id,
-            status: status
-        })
-    }).then((response) => response.json())
-        .then((response) => {
-            // state.innerText = 
-            console.log(`Status: ${response.status}`)
-            character.status = response.status
-        })
-}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 async function updateCharacter(character, stats_to_update){
     return fetch(`${ASSET_ROOT}/characters/${character.id}/update`, {

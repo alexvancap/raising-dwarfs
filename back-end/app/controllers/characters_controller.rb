@@ -35,4 +35,9 @@ class CharactersController < ActionController::API
       character.update({status: params[:status]})
       render json: character
     end
+
+    def find_character
+      character = Character.find(params[:id])
+      render json: character
+    end
 end

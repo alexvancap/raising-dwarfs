@@ -2,6 +2,7 @@ ASSET_ROOT = "http://localhost:3000"
 MAINTAG = document.querySelector("main")
 IMAGE_PATH = "./src/img"
 
+
 //IDEA: CHARACTER ONLY MOVES WHEN HOVERING OVER It
 //menue items only show up when in the homepage
 //mouse becomes special image
