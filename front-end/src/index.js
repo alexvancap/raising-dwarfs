@@ -2,6 +2,8 @@ ASSET_ROOT = "http://localhost:3000";
 MAINTAG = document.querySelector("main");
 IMAGE_PATH = "./src/img";
 
+console.log("Index.js Runs");
+
 //IDEA: CHARACTER ONLY MOVES WHEN HOVERING OVER It
 //menue items only show up when in the homepage
 //mouse becomes special image
@@ -26,6 +28,16 @@ function loadMain(user_id) {
   document.body.style.background =
     "#2b0200 url(./src/img/backgrounds/forest4.png) no-repeat center top";
   document.body.style.backgroundSize = "auto 750px";
+
+  // function createPrependElement(tag, input, parent, attributes = {}) {
+  //   const createdTag = document.createElement(tag);
+  //   createdTag.innerText = input;
+  //   for (attribute in attributes) {
+  //     createdTag.setAttribute(attribute, attributes[attribute]);
+  //   }
+  //   parent.prepend(createdTag);
+  //   return createdTag;
+  // }
 
   createPrependElement("div", "", MAINTAG, { id: "messages" });
   createPrependElement("img", "", MAINTAG, {

@@ -24,7 +24,7 @@ class CharactersController < ActionController::API
             update_value = value
           end
         elsif (value < 0)
-          if (character[key] + value < 0)
+          if !(character[key] + value < 0)
             update_value = value
           else
             character.update({status: "dead"})

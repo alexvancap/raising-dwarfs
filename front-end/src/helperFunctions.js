@@ -1,6 +1,8 @@
 ASSET_ROOT = "http://localhost:3000";
 CHARACTER_STATUS = "";
 
+console.log("Helper Functions run");
+
 function resetMainTagHTML() {
   MAINTAG.innerHTML = "";
   createAppendElement("div", "", MAINTAG, { id: "container" });
@@ -12,7 +14,6 @@ async function getCharactersByUserId(user_id) {
       return response.json();
     })
     .then(function(response) {
-      console.log(response);
       return response;
     });
 }
@@ -53,7 +54,6 @@ async function getUserMoney(user_id) {
       return response.json();
     })
     .then(response => {
-      console.log(response);
       return response;
     });
 }
@@ -165,10 +165,14 @@ function getRandomNumber(min, max) {
 }
 
 function createCard(character) {
+  let container = "";
   console.log("createCard Runs");
-  console.log(!document.getElementById("container" === true));
+  console.log(document.getElementById("container") === true);
   if (!document.getElementById("container")) {
-    container = createAppendElement("div", "", MAINTAG, { id: "container" });
+    console.log("container = createAppendElement Runs");
+    return (container = createAppendElement("div", "", MAINTAG, {
+      id: "container"
+    }));
   }
 
   container = document.getElementById("container");
@@ -277,15 +281,29 @@ updateDataEveryHour();
 async function updateDataEveryHour() {
   const interval = setInterval(() => {
     const date = new Date(Date.now());
-    if (date.getMinutes() === 00 && date.getSeconds() >= 10) {
-      getCharactersByUserId(LOGGED_IN_USER_ID).then(characters => {
-        document.querySelector("body").innerHTML = "";
+    //ORIGINAL CODE
+    // if (date.getMinutes() === 00 && date.getSeconds() >= 10) {
+    //   getCharactersByUserId(LOGGED_IN_USER_ID).then(characters => {
+    //     document.querySelector("body").innerHTML = "";
 
-        characters.forEach(function(character) {
-          createCard(character);
+    //     characters.forEach(character => {
+    //       return createCard(character);
+    //     });
+    //   });
+    let stats_to_update = {
+      thirsty: -10,
+      sleepy: -15,
+      social: -10,
+      hungry: -10
+    };
+    if (date.getSeconds() === 10) {
+      getCharactersByUserId(LOGGED_IN_USER_ID).then(characters => {
+        // document.querySelector("body").innerHTML = "";
+        characters.forEach(character => {
+          updateCharacter(character, stats_to_update);
         });
       });
-
+      console.log("runs interval");
       getUserMoney(LOGGED_IN_USER_ID).then(user => {});
       setTimeout(() => {
         updateDataEveryHour();
