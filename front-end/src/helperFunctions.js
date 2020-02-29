@@ -1,5 +1,6 @@
 ASSET_ROOT = "http://localhost:3000";
 CHARACTER_STATUS = "";
+// let characterCardsOpen = false;
 
 console.log("Helper Functions run");
 
@@ -166,10 +167,8 @@ function getRandomNumber(min, max) {
 
 function createCard(character) {
   let container = "";
-  console.log("createCard Runs");
-  console.log(document.getElementById("container") === true);
+  console.log("createCard starts to run");
   if (!document.getElementById("container")) {
-    console.log("container = createAppendElement Runs");
     return (container = createAppendElement("div", "", MAINTAG, {
       id: "container"
     }));
@@ -297,21 +296,48 @@ async function updateDataEveryHour() {
       hungry: -10
     };
     if (date.getSeconds() === 10) {
-      getCharactersByUserId(LOGGED_IN_USER_ID).then(characters => {
-        // document.querySelector("body").innerHTML = "";
-        characters.forEach(character => {
-          updateCharacter(character, stats_to_update);
+      console.log("run interval");
+      getCharactersByUserId(LOGGED_IN_USER_ID)
+        .then(characters => {
+          // document.querySelector("body").innerHTML = "";
+          characters.forEach(character => {
+            updateCharacter(character, stats_to_update);
+            console.log(character.name, "hungry:", character.hungry);
+            //   if (document.getElementById("container")) {
+            // CONTAINER.innerHTML = "";
+            // loadMain(LOGGED_IN_USER_ID);
+            // createCard(character);
+          });
+          if (document.getElementById("container")) {
+            document.getElementById("container").innerHTML = "";
+          }
+          console.log(
+            "character right before the card gets recreated ",
+            characters[0]
+          );
+          characterMenue();
+        })
+        .then(characters => {
+          return setTimeout(updateDataEveryHour, 60000);
         });
-      });
-      console.log("runs interval");
-      getUserMoney(LOGGED_IN_USER_ID).then(user => {});
-      setTimeout(() => {
-        updateDataEveryHour();
-        //waits 59minutes before calling function again
-      }, 3540000);
       return clearInterval(interval);
     }
   }, 1000);
+  // .then(characters => {
+  //   if (document.getElementById("container")) {
+  //     document.getElementById("container").innerHTML = "";
+  //     characterMenue();
+  //   }
+  // });
+
+  //   getUserMoney(LOGGED_IN_USER_ID).then(user => {});
+  //   setTimeout(() => {
+  //     updateDataEveryHour();
+  //     //waits 59minutes before calling function again
+  //   }, 3540000);
+  //   return clearInterval(interval);
+  //     }
+  //   }, 1000);
 }
 
 function createMenue() {
@@ -381,7 +407,10 @@ async function updateCharacter(character, stats_to_update) {
     })
   })
     .then(response => response.json())
-    .then(response => response);
+    .then(response => {
+      console.log(response);
+      return response;
+    });
 }
 // fetch(`${ASSET_ROOT}/characters/user_id`, {
 //     method: "PATCH",
@@ -395,3 +424,13 @@ async function updateCharacter(character, stats_to_update) {
 //     .then((response) => {
 //         response
 //     })
+
+function characterMenue() {
+  document.getElementById("messages").innerHTML = "";
+
+  fetchCharacterData().then(characters => {
+    characters.forEach(character => {
+      createCard(character);
+    });
+  });
+}

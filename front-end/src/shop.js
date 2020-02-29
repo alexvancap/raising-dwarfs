@@ -117,6 +117,7 @@ function createShopItems() {
     buyButton.addEventListener("click", () => {
       console.log("clicked buy button");
       getUserMoney(LOGGED_IN_USER_ID).then(user_money => {
+        console.log(user_money);
         if (user_money >= shopItem.price) {
           selectCharacterToGiveItem(shopItem, storeDiv);
         } else {

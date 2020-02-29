@@ -2,18 +2,6 @@ ASSET_ROOT = "http://localhost:3000";
 MAINTAG = document.querySelector("main");
 IMAGE_PATH = "./src/img";
 
-console.log("Index.js Runs");
-
-//IDEA: CHARACTER ONLY MOVES WHEN HOVERING OVER It
-//menue items only show up when in the homepage
-//mouse becomes special image
-//special image gets different color when moving over building
-
-//do something with dead status
-
-//make index.js the login file???????????
-//now file structure makes no sense
-
 document.addEventListener("DOMContentLoaded", () => {
   if (!localStorage.user_id) {
     loginForm(MAINTAG);

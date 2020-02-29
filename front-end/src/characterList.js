@@ -1,12 +1,12 @@
-function characterMenue() {
-  document.getElementById("messages").innerHTML = "";
+// function characterMenue() {
+//   document.getElementById("messages").innerHTML = "";
 
-  fetchCharacterData().then(characters => {
-    characters.forEach(character => {
-      createCard(character);
-    });
-  });
-}
+//   fetchCharacterData().then(characters => {
+//     characters.forEach(character => {
+//       createCard(character);
+//     });
+//   });
+// }
 
 // comes form helper functions  createCard()
 progressBar = function(num, name, cardBody) {
