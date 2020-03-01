@@ -276,6 +276,8 @@ function createProgressBar(character, cardBody, card) {
   card.append(image);
 }
 
+//IF YOU WANT TO CHANGE THE INTERVAL ON WHICH CHARACTER DATA IS UPDATED, MAKE SURE YOU ADJUST BOTH THE DATE.GETSECONDS()=== ?? AND THE SETTIMEOUT TIME
+
 updateDataEveryHour();
 async function updateDataEveryHour() {
   const interval = setInterval(() => {
@@ -301,21 +303,19 @@ async function updateDataEveryHour() {
         .then(characters => {
           // document.querySelector("body").innerHTML = "";
           characters.forEach(character => {
-            updateCharacter(character, stats_to_update);
-            console.log(character.name, "hungry:", character.hungry);
-            //   if (document.getElementById("container")) {
-            // CONTAINER.innerHTML = "";
-            // loadMain(LOGGED_IN_USER_ID);
-            // createCard(character);
+            updateCharacterOnInterval(character, stats_to_update);
+            //   console.log(character.name, "hungry:", character.hungry);
           });
-          if (document.getElementById("container")) {
-            document.getElementById("container").innerHTML = "";
-          }
-          console.log(
-            "character right before the card gets recreated ",
-            characters[0]
-          );
-          characterMenue();
+          // .then(characters => {
+          //   console.log(
+          //     "character right before the card gets recreated ",
+          //     characters[0]
+          //   );
+          //   if (document.getElementById("container")) {
+          //     document.getElementById("container").innerHTML = "";
+          //     characterMenue();
+          //   }
+          // });
         })
         .then(characters => {
           return setTimeout(updateDataEveryHour, 60000);
@@ -412,6 +412,26 @@ async function updateCharacter(character, stats_to_update) {
       return response;
     });
 }
+
+async function updateCharacterOnInterval(character, stats_to_update) {
+  return fetch(`${ASSET_ROOT}/characters/${character.id}/update`, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json"
+    },
+    body: JSON.stringify({
+      stats_to_update
+    })
+  })
+    .then(response => response.json())
+    .then(character => {
+      if (document.getElementById("container")) {
+        document.getElementById("container").innerHTML = "";
+        characterMenue();
+      }
+    });
+}
+
 // fetch(`${ASSET_ROOT}/characters/user_id`, {
 //     method: "PATCH",
 //     headers: {
