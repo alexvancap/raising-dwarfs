@@ -60,4 +60,11 @@ class UsersController < ActionController::API
         end
 
     end
+
+    def add_money
+        user = User.find(params[:id])
+        new_money = user.money + params[:money]
+        user.update({money: new_money})
+        render json: user.money
+    end
 end
