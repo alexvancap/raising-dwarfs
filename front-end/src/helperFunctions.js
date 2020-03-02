@@ -77,6 +77,24 @@ async function subtractMoney(user_id, money) {
     });
 }
 
+async function addMoney(user_id, character) {
+  return fetch(`${ASSET_ROOT}/users/${user_id}/add-money`, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json"
+    },
+    body: JSON.stringify({
+      money: character.earnings
+    })
+  })
+    .then(response => {
+      return response.json();
+    })
+    .then(money => {
+      return (document.getElementById("money").innerText = `${money} G`); //{CLEAR AND REPOPULATE THE INNERTEXT FOR THE NAV BAR MONEY};
+    });
+}
+
 async function fetchCharacterData() {
   return fetch("http://localhost:3000/characters")
     .then(function(response) {
@@ -300,12 +318,15 @@ async function updateDataEveryHour() {
     if (date.getSeconds() === 10) {
       console.log("run interval");
       getCharactersByUserId(LOGGED_IN_USER_ID)
-        .then(characters => {
+        .then(async characters => {
           // document.querySelector("body").innerHTML = "";
-          characters.forEach(character => {
-            updateCharacterOnInterval(character, stats_to_update);
-            //   console.log(character.name, "hungry:", character.hungry);
-          });
+          //   characters.forEach(character => {
+          for (let character of characters) {
+            await updateCharacterOnInterval(character, stats_to_update);
+            await addMoney(LOGGED_IN_USER_ID, character);
+          }
+          //   console.log(character.name, "hungry:", character.hungry);
+          //   });
           // .then(characters => {
           //   console.log(
           //     "character right before the card gets recreated ",
@@ -425,7 +446,7 @@ async function updateCharacterOnInterval(character, stats_to_update) {
   })
     .then(response => response.json())
     .then(character => {
-      if (document.getElementById("container")) {
+      if (document.getElementById("container").innerText.length > 0) {
         document.getElementById("container").innerHTML = "";
         characterMenue();
       }
