@@ -325,18 +325,6 @@ async function updateDataEveryHour() {
             await updateCharacterOnInterval(character, stats_to_update);
             await addMoney(LOGGED_IN_USER_ID, character);
           }
-          //   console.log(character.name, "hungry:", character.hungry);
-          //   });
-          // .then(characters => {
-          //   console.log(
-          //     "character right before the card gets recreated ",
-          //     characters[0]
-          //   );
-          //   if (document.getElementById("container")) {
-          //     document.getElementById("container").innerHTML = "";
-          //     characterMenue();
-          //   }
-          // });
         })
         .then(characters => {
           return setTimeout(updateDataEveryHour, 60000);
