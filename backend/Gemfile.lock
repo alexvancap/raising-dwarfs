@@ -89,8 +89,9 @@ GEM
     nio4r (2.5.2)
     nokogiri (1.10.7)
       mini_portile2 (~> 2.4.0)
-    puma (4.3.1)
-      nio4r (~> 2.0)
+    passenger (6.0.4)
+      rack
+      rake (>= 0.8.1)
     rack (2.0.8)
     rack-cors (1.1.1)
       rack (>= 2.0.0)
@@ -156,7 +157,7 @@ DEPENDENCIES
   bootsnap (>= 1.4.2)
   byebug
   listen (>= 3.0.5, < 3.2)
-  puma (~> 4.1)
+  passenger
   rack-cors
   rails (~> 6.0.2, >= 6.0.2.1)
   spring
@@ -168,4 +169,4 @@ RUBY VERSION
    ruby 2.6.1p33
 
 BUNDLED WITH
-   2.0.2
+   2.1.4
